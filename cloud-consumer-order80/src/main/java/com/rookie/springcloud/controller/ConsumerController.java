@@ -46,6 +46,13 @@ public class ConsumerController {
         return result;
     }
 
+    /*
+    * @Author 自由者
+    * @Description //测试自定义负载均衡算法，LoadBalancer
+    * @Date 13:45 2021/3/26
+    * @Param [id]
+    * @return java.lang.String
+    **/
     @ResponseBody
     @GetMapping(value = "/consumer/payment/lb/{id}")
     public String getPaymentLB(@PathVariable("id") Integer id) {
@@ -59,10 +66,28 @@ public class ConsumerController {
         return restTemplate.getForObject(uri + "/payment/lb/" + id , String.class);
     }
 
+    /*
+    * @Author 自由者
+    * @Description //测试zipkin
+    * @Date 13:46 2021/3/26
+    * @Param []
+    * @return java.lang.String
+    **/
     @ResponseBody
     @GetMapping("/consumer/payment/zipKin")
     public String zipKin() {
-        String result = restTemplate.getForObject(URL + "/payment/zipkin", String.class);
+        String result = restTemplate.getForObject(URL + "/payment/zipkin/", String.class);
+        System.out.println(result);
+        return result;
+    }
+
+    /*测试连接是否异常*/
+    @ResponseBody
+    @GetMapping("/consumer/payment/test")
+    public String test() {
+        System.out.println("-------------------------");
+        String result = restTemplate.getForObject(URL + "/payment/test", String.class);
+        System.out.println(result);
         return result;
     }
 }

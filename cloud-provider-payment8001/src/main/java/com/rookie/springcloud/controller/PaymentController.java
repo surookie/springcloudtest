@@ -65,14 +65,20 @@ public class PaymentController {
     }
 
     @GetMapping("/payment/lb/{id}")
-    public String sort(@PathVariable("id") Integer id, @RequestParam("password") String username) {
 
-        return port + ",lb,username=" + username + ",id=" + id;
+    public String sort(@PathVariable("id") Integer id) { /*, @RequestParam("password") String username*/
+        return port + ",lb,id=" + id;
+        /*return port + ",lb,username=" + username + ",id=" + id;*/
     }
 
 
     @GetMapping("/payment/zipkin")
     public String paymentZipkin(){
         return "hi ,i'am paymentzipkin server，welcome to atguigu，O(∩_∩)O哈哈~";
+    }
+
+    @GetMapping("/payment/test")
+    public String test(){
+        return "test..........";
     }
 }
