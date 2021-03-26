@@ -58,4 +58,11 @@ public class ConsumerController {
         System.out.println("uri: " + uri);
         return restTemplate.getForObject(uri + "/payment/lb", String.class);
     }
+
+    @ResponseBody
+    @GetMapping(value = "/consumer/payment/zipKin")
+    public String zipKin() {
+        String result = restTemplate.getForObject(URL + "/payment/zipkin/", String.class);
+        return result;
+    }
 }
