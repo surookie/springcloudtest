@@ -47,8 +47,8 @@ public class ConsumerController {
     }
 
     @ResponseBody
-    @GetMapping(value = "/consumer/payment/lb")
-    public String getPaymentLB() {
+    @GetMapping(value = "/consumer/payment/lb/{id}")
+    public String getPaymentLB(@PathVariable("id") Integer id) {
         List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
         if (instances == null || instances.size() <= 0) {
             return null;
@@ -56,13 +56,13 @@ public class ConsumerController {
         ServiceInstance serviceInstance = loadBalancer.instances(instances);
         URI uri = serviceInstance.getUri();
         System.out.println("uri: " + uri);
-        return restTemplate.getForObject(uri + "/payment/lb", String.class);
+        return restTemplate.getForObject(uri + "/payment/lb/" + id , String.class);
     }
 
     @ResponseBody
-    @GetMapping(value = "/consumer/payment/zipKin")
+    @GetMapping("/consumer/payment/zipKin")
     public String zipKin() {
-        String result = restTemplate.getForObject(URL + "/payment/zipkin/", String.class);
+        String result = restTemplate.getForObject(URL + "/payment/zipkin", String.class);
         return result;
     }
 }
